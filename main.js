@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+require('discord-reply');
 const fs = require('fs');
 
 const client = new Discord.Client();
@@ -28,7 +29,9 @@ bot.on('message', (message) => {
     const command = args.shift().toLowerCase();
     
     if(command === 'help'){
-        message.channel.send(`commands: help, prefix: $, guilds: ${bot.guilds.cache.size}`);
+        message.lineReply(`commands: help, prefix: $, guilds: ${bot.guilds.cache.size}`);
+    } else if(command === 'ping'){
+        client.commands.get('ping').execute(message, args);
     }
 });
 
