@@ -21,15 +21,15 @@ client.once('ready', async () => {
 })
 
 
-bot.on('message', (message) => {
+client.on('message', (message) => {
     if (!message.guild) return;
-    if(!message.content.startsWith(prefix) || message.author.bot) return;
+    if(!message.content.startsWith(prefix) || message.author.client) return;
     let channel = message.channel;
     const args = message.content.slice(prefix.length).split(/ +/);
     const command = args.shift().toLowerCase();
     
     if(command === 'help'){
-        message.lineReply(`commands: help, prefix: $, guilds: ${bot.guilds.cache.size}`);
+        message.lineReply(`commands: help, prefix: $, guilds: ${client.guilds.cache.size}`);
     } else if(command === 'ping'){
         client.commands.get('ping').execute(message, args);
     }
