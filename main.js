@@ -1,5 +1,4 @@
 const Discord = require('discord.js');
-require('discord-reply');
 
 const client = new Discord.Client();
 
@@ -21,12 +20,14 @@ client.once('ready', async () => {
 
 
 bot.on('message', (message) => {
-    if (!message.content.startsWith(prefix) || message.author.bot) return;
-    
+    if (!message.guild) return;
+    if(!message.content.startsWith(prefix) || message.author.bot) return;
     let channel = message.channel;
+    const args = message.content.slice(prefix.length).split(/ +/);
+    const command = args.shift().toLowerCase();
     
     if(command === 'help'){
-        message.lineReply(`commands: help, prefix: $, guilds: ${bot.guilds.cache.size}`);
+        message.channel.send(`commands: help, prefix: $, guilds: ${bot.guilds.cache.size}`);
     }
 });
 
