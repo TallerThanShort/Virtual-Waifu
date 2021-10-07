@@ -26,8 +26,8 @@ bot.on('message', (message) => {
     let channel = message.channel;
     
     if(command === 'help'){
-        message.channel.send(`commands: help, prefix: $, guilds: ${bot.guilds.cache.size}`);
+        message.lineReply(`commands: help, prefix: $, guilds: ${bot.guilds.cache.size}`);
     }
-)}
+});
 
 client.login(process.env.token);
