@@ -34,6 +34,8 @@ client.on('message', message =>{
     } else if(command === 'join'){
         if(!message.member.voice.channel) return message.reply("Please connect to a voice channel!");
         message.member.voice.channel.join();
+    } else if(command === 'stop'){
+        message.member.voice.channel.leave();
     }
 });
 
