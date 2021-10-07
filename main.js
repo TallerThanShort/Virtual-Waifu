@@ -6,4 +6,4 @@ client.once('ready', () => {
     console.log('bot onluine')
 })
 
-client.login('');
+client.login('process.env.token');
