@@ -32,6 +32,9 @@ client.on('message', (message) => {
         message.lineReply(`commands: help, prefix: '?', guilds: ${client.guilds.cache.size}`);
     } else if(command === 'ping'){
         client.commands.get('ping').execute(message, args);
+    } else if(command === 'join'){
+        if(!message.member.voice.channel) return message.lineReply("Please connect to a voice channel!");
+        message.member.voice.channel.join();
     }
 });
 
