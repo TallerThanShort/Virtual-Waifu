@@ -32,7 +32,7 @@ client.on('message', message =>{
     } else if(command === 'ping'){
         client.commands.get('ping').execute(message, args);
     } else if(command === 'join'){
-        if(!message.member.voice.channel) return message.lineReply("Please connect to a voice channel!");
+        if(!message.member.voice.channel) return message.reply("Please connect to a voice channel!");
         message.member.voice.channel.join();
     }
 });
