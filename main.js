@@ -4,7 +4,7 @@ const fs = require('fs');
 
 const client = new Discord.Client();
 
-const prefix = '$';
+const prefix = 'vw!';
 client.commands = new Discord.Collection();
 
 const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
@@ -16,7 +16,7 @@ for(const file of commandFiles){
 
 client.once('ready', async () => {
     
-    await client.user.setPresence({ activity: { name: "$help", type: "LISTENING"}, status: 'dnd'}) 
+    await client.user.setPresence({ activity: { name: "vw!help", type: "LISTENING"}, status: 'dnd'}) 
     console.log('waifu awoken')
 })
 
@@ -29,7 +29,7 @@ client.on('message', (message) => {
     const command = args.shift().toLowerCase();
     
     if(command === 'help'){
-        message.lineReply(`commands: help, prefix: $, guilds: ${client.guilds.cache.size}`);
+        message.lineReply(`commands: help, prefix: 'vw!', guilds: ${client.guilds.cache.size}`);
     } else if(command === 'ping'){
         client.commands.get('ping').execute(message, args);
     }
