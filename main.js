@@ -28,7 +28,7 @@ client.on('message', message =>{
     const command = args.shift().toLowerCase();
     
     if(command === 'help'){
-        message.channel.send(`commands: help, prefix: 'vw!', guilds: ${client.guilds.cache.size}`);
+        message.channel.send(`commands: help ping join play stop, prefix: 'vw!', guilds: ${client.guilds.cache.size}`);
     } else if(command === 'ping'){
         client.commands.get('ping').execute(message, args);
     } else if(command === 'join'){
