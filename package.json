@@ -1,0 +1,22 @@
+{
+  "name": "virtual-waifu",
+  "version": "1.0.2",
+  "description": "muzik bot",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TallerThanShort/Virtual-Waifu.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TallerThanShort/Virtual-Waifu/issues"
+  },
+  "homepage": "https://github.com/TallerThanShort/Virtual-Waifu#readme",
+  "dependencies": {
+    "discord.js": "^13.2.0"
+  }
+}
