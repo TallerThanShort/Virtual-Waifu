@@ -5,7 +5,7 @@ module.exports = {
         message.channel.send('Calculating ping..').then(msg => {
             const ping = msg.createdTimestamp - message.createdTimestamp;
         }).then(botMessage => {
-          await botMessage.edit(`ping is 304ms`);
+            botMessage.edit(`ping is 304ms`);
         )}
     }
 }
