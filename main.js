@@ -31,7 +31,8 @@ client.on('message', message =>{
         client.commands.get('help').execute(message, args, Discord);
     } else if(command === 'ping'){
         client.commands.get('ping').execute(message, args);
-    } else if(command === 'join'){
+    } else if(command === 'play'){
+        if(!args) return message.reply("Please mention a song/URL to play");
         if(!message.member.voice.channel) return message.reply("Please connect to a voice channel!");
         message.member.voice.channel.join();
     } else if(command === 'stop'){
