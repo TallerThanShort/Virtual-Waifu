@@ -6,6 +6,6 @@ module.exports = {
             const ping = msg.createdTimestamp - message.createdTimestamp;
         }).then(botMessage => {
             botMessage.edit(`ping is 304ms`);
-        )}
+        })
     }
 }
