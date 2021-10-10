@@ -6,12 +6,12 @@ module.exports = {
             .setColor('RANDOM')
             .setTitle('Commands')
             .addFields(
-                {name: 'Public commands', value: 'help, ping, join, stop, play'},
+                {name: 'Public commands', value: 'help, ping, play, stop'},
                 {name: 'Developer-only commands', value: 'debug'},
             )
             .setFooter('help for Virtual Waifu')
         
         message.channel.send(helpEmbed);
-        message.react('<a:typing:855611027827982357>');
+        message.react('855611027827982357');
     }
 }
