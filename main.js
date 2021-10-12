@@ -38,7 +38,7 @@ client.on('message', message =>{
     } else if(command === 'stop'){
         message.member.voice.channel.leave();
     } else if(command === 'waifu'){
-        message.channel.send('aii!')
+        message.channel.send('https://raw.githubusercontent.com/TallerThanShort/Virtual-Waifu/main/mawaw-147v2-ghpicsay.jpg')
     }
 });
 
