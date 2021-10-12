@@ -37,6 +37,8 @@ client.on('message', message =>{
         message.member.voice.channel.join();
     } else if(command === 'stop'){
         message.member.voice.channel.leave();
+    } else if(command === 'waifu'){
+        message.channel.send('aii!')
     }
 });
 
