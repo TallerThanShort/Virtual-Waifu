@@ -35,6 +35,13 @@ client.on('message', message =>{
         if(!args) return message.reply("Please mention a song/URL to play");
         if(!message.member.voice.channel) return message.reply("Please connect to a voice channel!");
         message.member.voice.channel.join();
+        let timeoutID;
+
+        timeoutID = setTimeout(() => {
+        }, 15 * 60 * 1000) // You should use the time in ms
+
+        clearTimeout(timeoutID)
+        timeoutID = undefined
     } else if(command === 'stop'){
         message.member.voice.channel.leave();
     } else if(command === 'waifu'){
