@@ -33,3 +33,9 @@ client.on('message', message =>{
         client.commands.get('ping').execute(message, args);
     } else if(command === 'play'){
         client.commands.get('play').execute(message, args);
+    } else if(command === 'stop'){
+        message.member.voice.channel.leave();
+    } else if(command === 'waifu'){
+        message.channel.send('https://raw.githubusercontent.com/TallerThanShort/Virtual-Waifu/main/mawaw-147v2-ghpicsay.jpg')
+    }
+});
