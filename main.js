@@ -32,21 +32,4 @@ client.on('message', message =>{
     } else if(command === 'ping'){
         client.commands.get('ping').execute(message, args);
     } else if(command === 'play'){
-        if(!args) return message.reply("Please mention a song/URL to play");
-        if(!message.member.voice.channel) return message.reply("Please connect to a voice channel!");
-        message.member.voice.channel.join();
-        let timeoutID;
-
-        timeoutID = setTimeout(() => {
-        }, 15 * 60 * 1000) // You should use the time in ms
-
-        clearTimeout(timeoutID)
-        timeoutID = undefined
-    } else if(command === 'stop'){
-        message.member.voice.channel.leave();
-    } else if(command === 'waifu'){
-        message.channel.send('https://raw.githubusercontent.com/TallerThanShort/Virtual-Waifu/main/mawaw-147v2-ghpicsay.jpg')
-    }
-});
-
-client.login(process.env.token);
+        client.commands.get('play').execute(message, args);
