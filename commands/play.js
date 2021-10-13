@@ -2,6 +2,7 @@ module.exports = {
     name: 'play',
     description: "this is the command to join & play muzik",
     execute(message, args){
+    const voiceChannel = message.member.voice.channel;
         if(!args){
             message.reply("Please mention a song/URL to play");
         } else if(!message.member.voice.channel){
@@ -11,4 +12,4 @@ module.exports = {
         }
     }
 }
-// I'm dumb enough to leave this like this, ok??? ik it wont work
+// All the above code is basically void, and it can wait until tomorrow for a fix
