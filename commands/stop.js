@@ -1,8 +1,11 @@
 module.exports = {
     name: 'stop',
     description: "this command make bot leave vc",
-    execute(message, args){
-        message.member.voice.channel.leave();
-// that should work, right?
+     async execute(message, args){
+        const voiceChannel = message.member.voice.channel;
+
+        if(!voiceChannel) return message.reply('no vc');
+        await voiceChannel.leave();
+        await message.channel.send('Left vc');
     }
 }
