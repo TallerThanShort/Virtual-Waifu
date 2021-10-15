@@ -39,3 +39,5 @@ client.on('message', message =>{
         message.channel.send('https://raw.githubusercontent.com/TallerThanShort/Virtual-Waifu/main/mawaw-147v2-ghpicsay.jpg')
     }
 });
+
+client.login(process.env.token);
