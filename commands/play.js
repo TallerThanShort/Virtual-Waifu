@@ -13,6 +13,32 @@ module.exports = {
         if(!permissions.has('SPEAK')) return message.channel.send('You dont have the rights perms...');
         if(!args.length) return message.reply('No search query');
 
+
+        const urlVerification = (str) =>{
+            var regex = /(http|https):\/\/(\w+:{0,1}\w*)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&!\-\/]))?/;
+            if(!regex.test(str)){
+                return false;
+            } else {
+                return true;
+            }
+        }
+
+        if(urlVerification(args[0])){
+            
+            const connect = await voiceChannel.join();
+            const stream = ytdl(args[0], {filter: 'audioonly'});
+
+            connect.play(stream, {seek: 0, volume: 2})
+            .on('finish', () =>{
+                voiceChannel.leave();
+                message.reply('song finished, leaving channel');
+            });
+
+            await message.reply(`Now Playing ***Your Link***!`)
+
+            return
+        }
+
         const connect = await voiceChannel.join();
 
         const result = async (query) => {
@@ -28,6 +54,7 @@ module.exports = {
             connect.play(stream, {seek: 0, volume: 2})
             .on('finish', () =>{
                 voiceChannel.leave();
+                message.reply('song finished, leaving channel');
             });
 
             await message.reply(`Now playing ***${video.title}***`);
@@ -36,4 +63,4 @@ module.exports = {
         }
     }
 }
-// All the above code is basically void, need to add node modules
+// I hope this freaking works!

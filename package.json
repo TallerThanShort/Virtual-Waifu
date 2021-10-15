@@ -17,7 +17,11 @@
   },
   "homepage": "https://github.com/TallerThanShort/Virtual-Waifu#readme",
   "dependencies": {
+    "@discordjs/opus": "^0.6.0",
     "discord-reply": "^0.1.2",
-    "discord.js": "^12.2.0"
+    "discord.js": "^12.2.0",
+    "ffmpeg-static": "^4.4.0",
+    "yt-search": "^2.10.2",
+    "ytdl-core": "^4.9.1"
   }
 }
