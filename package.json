@@ -2,6 +2,9 @@
   "name": "virtual-waifu",
   "version": "1.0.2",
   "description": "muzik bot",
+  "engines": {
+    "node": "14.16.0"
+  },
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
