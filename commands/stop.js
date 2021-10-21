@@ -1,7 +1,7 @@
 module.exports = {
     name: 'stop',
     description: "this command make bot leave vc",
-     async execute(message, args){
+     async execute(client, message, args){
         const voiceChannel = message.member.voice.channel;
 
         if(!voiceChannel) return message.reply('no vc');

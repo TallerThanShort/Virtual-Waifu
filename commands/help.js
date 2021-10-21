@@ -1,7 +1,7 @@
 module.exports = {
     name: 'help',
     description: "this is a help command",
-    execute(message, args, Discord){
+    execute(client, message, args, Discord){
         const helpEmbed = new Discord.MessageEmbed()
             .setColor('RANDOM')
             .setTitle('Commands')
@@ -10,7 +10,7 @@ module.exports = {
                 {name: 'Developer-only commands', value: 'debug'},
                 {name: 'Prefix', value: 'vw!'}
             )
-            .setFooter('help for Virtual Waifu#5702 (895251019603259403) v7')
+            .setFooter('help for Virtual Waifu#5702 (895251019603259403) v9')
         
         message.channel.send(helpEmbed);
         message.react('855611027827982357');

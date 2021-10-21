@@ -4,7 +4,7 @@ const ytSearch = require('yt-search');
 module.exports = {
     name: 'play',
     description: "joins vc & plays muzik",
-     async execute(message, args){
+     async execute(client, message, args){
         const voiceChannel = message.member.voice.channel;
 
         if(!voiceChannel) return message.reply('Join a vc first!');
