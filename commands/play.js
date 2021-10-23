@@ -1,66 +1,70 @@
 const ytdl = require('ytdl-core');
 const ytSearch = require('yt-search');
 
+const queue = new Map();
+
 module.exports = {
     name: 'play',
+    aliases: ['skip', 'stop'],
     description: "joins vc & plays muzik",
-     async execute(client, message, args){
+     async execute(message, args, cmd, client, Discord){
         const voiceChannel = message.member.voice.channel;
 
         if(!voiceChannel) return message.reply('Join a vc first!');
         const permissions = voiceChannel.permissionsFor(message.client.user);
-        if(!permissions.has('CONNECT')) return message.channel.send('You dont have the rights perms..');
-        if(!permissions.has('SPEAK')) return message.channel.send('You dont have the rights perms...');
-        if(!args.length) return message.reply('No search query');
+        if(!permissions.has('CONNECT')) return message.channel.send("You dont have `CONNECT` perms..");
+        if(!permissions.has('SPEAK')) return message.channel.send("You dont have `SPEAK` perms...");
 
 
-        const urlVerification = (str) =>{
-            var regex = /(http|https):\/\/(\w+:{0,1}\w*)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&!\-\/]))?/;
-            if(!regex.test(str)){
-                return false;
-            } else {
-                return true;
+        const server_queue = queue.get(message.guild.id);
+
+        if(cmd === 'play'){
+            if(!args.length) return message.reply('No search query');
+            let song = {};
+
+            if(ytdl.validateURL(args[0])){
+                const songInfo = await ytdl.getInfo(args[0]);
+                song = { title: songInfo.videoDetails.title, url: songInfo.videoDetails.video_url }
+            } else{
+                const videoFinder = async (query) =>{
+                    const result = await ytSearch(query);
+                    return (result.videos.length > 1) ? result.videos[0] : null;
+                }
+
+                const video = await videoFinder(args.join(' '));
+                if(video){
+                    song = { title: video.title, url: video.url }
+                } else{
+                    message.channel.send('*ERROR FINDING VIDEO*');
+                }
             }
         }
+        if(!server_queue){
+            const queue_constructor = {
+                voice_channel: voiceChannel,
+                text_channel: message.channel,
+                connection: null,
+                songs: []
+            }
+            queue.set(message.guild.id, queue_constructor);
+            queue_constructor.songs.push(song);
 
-        if(urlVerification(args[0])){
-            
-            const connect = await voiceChannel.join();
-            const stream = ytdl(args[0], {filter: 'audioonly'});
-
-            connect.play(stream, {seek: 0, volume: 2})
-            .on('finish', () =>{
-                voiceChannel.leave();
-                message.reply('song finished, leaving channel');
-            });
-
-            await message.reply(`Now Playing ***Your Link***!`)
-
-            return
-        }
-
-        const connect = await voiceChannel.join();
-
-        const result = async (query) => {
-            const videoSearch = await ytSearch(query);
-
-            return (videoSearch.videos.length > 1) ? videoSearch.videos[0] : null;
-        }
-
-        const video = await result(args.join(' '));
-
-        if(video){
-            const stream = ytdl(video.url, {filter: 'audioonly'});
-            connect.play(stream, {seek: 0, volume: 2})
-            .on('finish', () =>{
-                voiceChannel.leave();
-                message.reply('song finished, leaving channel');
-            });
-
-            await message.reply(`Now playing ***${video.title}***`);
+            try{
+                const connection = await voiceChannel.join();
+                queue_constructor.connection = connection;
+                video_player(message.guild, queue_constructor.songs[0]);
+            } catch (err){
+                queue.delete(message.guild.id);
+                message.channel.send("There was an error. `error_code=10053`");
+                throw err;
+            }
         } else{
-            message.reply('No videos found');
+            server_queue.songs.push(song);
+            return message.channel.send(`***${song.title}*** added to queue.`);
         }
     }
 }
-// I hope this freaking works!
+
+const video_player = async (guild, song) => {
+    
+}
