@@ -38,8 +38,8 @@ module.exports = {
                     message.channel.send('*ERROR FINDING VIDEO*');
                 }
             }
-        }
-        if(!server_queue){
+
+            if(!server_queue){
             const queue_constructor = {
                 voice_channel: voiceChannel,
                 text_channel: message.channel,
@@ -63,8 +63,20 @@ module.exports = {
             return message.channel.send(`***${song.title}*** added to queue.`);
         }
     }
+  }
 }
-
 const video_player = async (guild, song) => {
-    
+    const song_queue = queue.get(guild.id);
+    if(!song){
+        song_queue.voiceChannel.leave();
+        queue.delete(guild.id);
+        return;
+    }
+    const stream = ytdl(song.url, { filter: 'audioonly' });
+    song_queue.connection.play(stream, { seek: 0, volume: 1 });
+    .on('finish', () => {
+        song_queue.songs.shift();
+        video_player(guild, song_queue.songs[0]);
+    });
+    await song_queue.text_channel.send(`Now playing ***${song.title}***`)
 }
