@@ -63,6 +63,9 @@ module.exports = {
             return message.channel.send(`***${song.title}*** added to queue.`);
         }
     }
+
+    else if(cmd === 'skip') skip_song(message, server_queue);
+    else if(cmd === 'stop') stop_song(message, server_queue);
   }
 }
 const video_player = async (guild, song) => {
@@ -79,4 +82,17 @@ const video_player = async (guild, song) => {
         video_player(guild, song_queue.songs[0]);
     });
     await song_queue.text_channel.send(`Now playing ***${song.title}***`)
+}
+
+const skip_song = (message, server_queue) =>{
+    if(!message.member.voice.channel) return message.reply('You must be in a vc to execute this command!');
+    if(!server_queue){
+        return message.reply('No more songs in queue');
+    }
+    server_queue.connection.dispatcher.end();
+}
+const stop_song = (message, server_queue) =>{
+    if(!message.member.voice.channel) return message.reply('You must be in a vc to execute this command!');
+    server_queue.songs = [];
+    server_queue.connection.dispatcher.end();
 }
