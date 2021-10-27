@@ -1,5 +1,6 @@
 module.exports = {
     name: 'help',
+    aliases: ['h', 'pls'],
     description: "this is a help command",
     execute(message, args, cmd, client, Discord){
         const helpEmbed = new Discord.MessageEmbed()
