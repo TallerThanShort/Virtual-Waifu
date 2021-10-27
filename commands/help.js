@@ -1,7 +1,7 @@
 module.exports = {
     name: 'help',
     description: "this is a help command",
-    execute(client, message, args, Discord){
+    execute(message, args, cmd, client, Discord){
         const helpEmbed = new Discord.MessageEmbed()
             .setColor('RANDOM')
             .setTitle('Commands')
