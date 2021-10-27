@@ -95,4 +95,5 @@ const stop_song = (message, server_queue) =>{
     if(!message.member.voice.channel) return message.reply('You must be in a vc to execute this command!');
     server_queue.songs = [];
     server_queue.connection.dispatcher.end();
+    song_queue.voiceChannel.leave();
 }
