@@ -8,10 +8,10 @@ module.exports = {
     aliases: ['skip', 'stop'],
     description: "joins vc & plays muzik",
      async execute(message, args, cmd, client, Discord){
-        const voiceChannel = message.member.voice.channel;
+        const voice_channel = message.member.voice.channel;
 
-        if(!voiceChannel) return message.reply('Join a vc first!');
-        const permissions = voiceChannel.permissionsFor(message.client.user);
+        if(!voice_channel) return message.reply('Join a vc first!');
+        const permissions = voice_channel.permissionsFor(message.client.user);
         if(!permissions.has('CONNECT')) return message.channel.send("You dont have `CONNECT` perms..");
         if(!permissions.has('SPEAK')) return message.channel.send("You dont have `SPEAK` perms...");
 
@@ -41,7 +41,7 @@ module.exports = {
 
             if(!server_queue){
             const queue_constructor = {
-                voice_channel: voiceChannel,
+                voice_channel: voice_channel,
                 text_channel: message.channel,
                 connection: null,
                 songs: []
@@ -50,7 +50,7 @@ module.exports = {
             queue_constructor.songs.push(song);
 
             try{
-                const connection = await voiceChannel.join();
+                const connection = await voice_channel.join();
                 queue_constructor.connection = connection;
                 video_player(message.guild, queue_constructor.songs[0]);
             } catch (err){
@@ -71,7 +71,7 @@ module.exports = {
 const video_player = async (guild, song) => {
     const song_queue = queue.get(guild.id);
     if(!song){
-        song_queue.voiceChannel.leave();
+        song_queue.voice_channel.leave();
         queue.delete(guild.id);
         return;
     }
@@ -88,6 +88,7 @@ const skip_song = (message, server_queue) =>{
     if(!message.member.voice.channel) return message.reply('You must be in a vc to execute this command!');
     if(!server_queue){
         return message.reply('No more songs in queue');
+        song_queue.voice_channel.leave();
     }
     server_queue.connection.dispatcher.end();
 }
@@ -95,5 +96,5 @@ const stop_song = (message, server_queue) =>{
     if(!message.member.voice.channel) return message.reply('You must be in a vc to execute this command!');
     server_queue.songs = [];
     server_queue.connection.dispatcher.end();
-    song_queue.voiceChannel.leave();
+    song_queue.voice_channel.leave();
 }
