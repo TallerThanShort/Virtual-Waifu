@@ -10,7 +10,7 @@ module.exports = {
                 {name: 'Developer-only commands', value: 'debug'},
                 {name: 'Prefix', value: 'vw!'}
             )
-            .setFooter('help for Virtual Waifu#5702 (895251019603259403) v20')
+            .setFooter('help for Virtual Waifu#5702 v22')
         
         message.channel.send(helpEmbed);
         message.react('855611027827982357');
