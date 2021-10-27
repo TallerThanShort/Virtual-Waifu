@@ -1,5 +1,6 @@
 module.exports = {
     name: 'ping',
+    aliases: ['pin', 'ing'],
     description: "ping in ms reply thing",
     execute(message, args, cmd, client, Discord){
         botMessage = message.channel.send('Calculating ping..').then(msg => {
