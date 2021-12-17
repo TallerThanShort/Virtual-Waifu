@@ -11,9 +11,9 @@ module.exports = {
                 {name: 'Developer-only commands', value: 'debug'},
                 {name: 'Prefix', value: 'vw!'}
             )
-            .setFooter('help for Virtual Waifu#5702 v22')
+            .setFooter('help for Virtual Waifu#5702 v29 (Waifu Reboot)')
         
-        message.channel.send(helpEmbed);
+        message.channel.send({embeds: [helpEmbed]});
         message.react('855611027827982357');
     }
 }
