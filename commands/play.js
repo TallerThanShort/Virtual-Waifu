@@ -99,7 +99,8 @@ const skip_song = (message, server_queue) =>{
             guildId: message.guild.id,
             adapterCreator: message.guild.voiceAdapterCreator
         })
-        joinVoiceChannel.leave();
+        //joinVoiceChannel.leave();
+        connection.destroy();
         return message.reply('No more songs in queue');
     }
     server_queue.connection.dispatcher.end();
@@ -113,5 +114,6 @@ const stop_song = (message, server_queue) =>{
     //if(!message.member.voice.channel) return message.reply('You must be in a vc to execute this command!');
     server_queue.songs = [];
     server_queue.connection.dispatcher.end();
-    joinVoiceChannel.leave();
+    //joinVoiceChannel.leave();
+    connection.destroy();
 }
