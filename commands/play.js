@@ -11,11 +11,6 @@ module.exports = {
         //const voice_channel = message.member.voice.channel;
 
         const { joinVoiceChannel } = require('@discordjs/voice');
-                joinVoiceChannel({
-                    channelId: message.member.voice.channel.id,
-                    guildId: message.guild.id,
-                    adapterCreator: message.guild.voiceAdapterCreator
-                })
 
         if(!joinVoiceChannel) return message.reply('Join a vc first!');
         //const permissions = joinVoiceChannel.permissionsFor(message.client.user);
@@ -27,6 +22,11 @@ module.exports = {
 
         if(cmd === 'play'){
             if(!args.length) return message.reply('No search query');
+            joinVoiceChannel({
+                channelId: message.member.voice.channel.id,
+                guildId: message.guild.id,
+                adapterCreator: message.guild.voiceAdapterCreator
+            })
             let song = {};
 
             if(ytdl.validateURL(args[0])){
@@ -71,8 +71,22 @@ module.exports = {
         }
     }
 
-    else if(cmd === 'skip') skip_song(message, server_queue);
-    else if(cmd === 'stop') stop_song(message, server_queue);
+    else if(cmd === 'skip'){
+        joinVoiceChannel({
+            channelId: message.member.voice.channel.id,
+            guildId: message.guild.id,
+            adapterCreator: message.guild.voiceAdapterCreator
+        })
+        skip_song(message, server_queue);
+    }
+    else if(cmd === 'stop'){
+        joinVoiceChannel({
+            channelId: message.member.voice.channel.id,
+            guildId: message.guild.id,
+            adapterCreator: message.guild.voiceAdapterCreator
+        })
+        stop_song(message, server_queue);
+    }
   }
 }
 const video_player = async (guild, song) => {
