@@ -18,9 +18,9 @@ module.exports = {
                 })
 
         if(!joinVoiceChannel) return message.reply('Join a vc first!');
-        const permissions = joinVoiceChannel.permissionsFor(message.client.user);
-        if(!permissions.has('CONNECT')) return message.channel.send("You dont have `CONNECT` perms..");
-        if(!permissions.has('SPEAK')) return message.channel.send("You dont have `SPEAK` perms...");
+        //const permissions = joinVoiceChannel.permissionsFor(message.client.user);
+        //if(!permissions.has('CONNECT')) return message.channel.send("You dont have `CONNECT` perms..");
+        //if(!permissions.has('SPEAK')) return message.channel.send("You dont have `SPEAK` perms...");
 
 
         const server_queue = queue.get(message.guild.id);
