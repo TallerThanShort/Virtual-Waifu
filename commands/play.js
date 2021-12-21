@@ -71,22 +71,8 @@ module.exports = {
         }
     }
 
-    else if(cmd === 'skip'){
-        joinVoiceChannel({
-            channelId: message.member.voice.channel.id,
-            guildId: message.guild.id,
-            adapterCreator: message.guild.voiceAdapterCreator
-        })
-        skip_song(message, server_queue);
-    }
-    else if(cmd === 'stop'){
-        joinVoiceChannel({
-            channelId: message.member.voice.channel.id,
-            guildId: message.guild.id,
-            adapterCreator: message.guild.voiceAdapterCreator
-        })
-        stop_song(message, server_queue);
-    }
+    else if(cmd === 'skip') skip_song(message, server_queue);
+    else if(cmd === 'stop') stop_song(message, server_queue);
   }
 }
 const video_player = async (guild, song) => {
@@ -106,16 +92,26 @@ const video_player = async (guild, song) => {
 }
 
 const skip_song = (message, server_queue) =>{
-    if(!message.member.voice.channel) return message.reply('You must be in a vc to execute this command!');
+    //if(!message.member.voice.channel) return message.reply('You must be in a vc to execute this command!');
     if(!server_queue){
+        joinVoiceChannel({
+            channelId: message.member.voice.channel.id,
+            guildId: message.guild.id,
+            adapterCreator: message.guild.voiceAdapterCreator
+        })
+        joinVoiceChannel.leave();
         return message.reply('No more songs in queue');
-        song_queue.joinVoiceChannel.leave();
     }
     server_queue.connection.dispatcher.end();
 }
 const stop_song = (message, server_queue) =>{
-    if(!message.member.voice.channel) return message.reply('You must be in a vc to execute this command!');
+    joinVoiceChannel({
+        channelId: message.member.voice.channel.id,
+        guildId: message.guild.id,
+        adapterCreator: message.guild.voiceAdapterCreator
+    })
+    //if(!message.member.voice.channel) return message.reply('You must be in a vc to execute this command!');
     server_queue.songs = [];
     server_queue.connection.dispatcher.end();
-    song_queue.joinVoiceChannel.leave();
+    joinVoiceChannel.leave();
 }
