@@ -12,10 +12,7 @@ module.exports = {
 
         const { joinVoiceChannel } = require('@discordjs/voice');
 
-        if(!joinVoiceChannel) return message.reply('Join a vc first!');
-        //const permissions = joinVoiceChannel.permissionsFor(message.client.user);
-        //if(!permissions.has('CONNECT')) return message.channel.send("You dont have `CONNECT` perms..");
-        //if(!permissions.has('SPEAK')) return message.channel.send("You dont have `SPEAK` perms...");
+        if(!message.member.voice.channel.id) return message.reply('Join a vc first!');
 
 
         const server_queue = queue.get(message.guild.id);
@@ -42,7 +39,7 @@ module.exports = {
                 if(video){
                     song = { title: video.title, url: video.url }
                 } else{
-                    message.channel.send('*ERROR FINDING VIDEO*');
+                    message.channel.send('**ERROR FINDING VIDEO**');
                 }
             }
 
@@ -57,12 +54,17 @@ module.exports = {
             queue_constructor.songs.push(song);
 
             try{
-                const connection = await joinVoiceChannel.join();
+                const connection = await joinVoiceChannel;
+                joinVoiceChannel({
+                    channelId: message.member.voice.channel.id,
+                    guildId: message.guild.id,
+                    adapterCreator: message.guild.voiceAdapterCreator
+                })
                 queue_constructor.connection = connection;
                 video_player(message.guild, queue_constructor.songs[0]);
             } catch (err){
                 queue.delete(message.guild.id);
-                message.channel.send("There was an error. `error_code=10053`");
+                message.channel.send("There was an error." + err);
                 throw err;
             }
         } else{
@@ -95,7 +97,7 @@ const video_player = async (guild, song) => {
     //    song_queue.songs.shift();
     //    video_player(guild, song_queue.songs[0]);
     //});
-    await song_queue.text_channel.send(`Now playing ***${song.title}***`)
+    await song_queue.text_channel.send(`**Now playing** ${song.title}`)
 }
 
 const skip_song = (message, server_queue) =>{

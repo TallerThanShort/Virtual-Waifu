@@ -1,6 +1,12 @@
 const Discord = require('discord.js');
 const fs = require('fs');
 
+const { VoiceConnectionStatus } = require('@discordjs/voice');
+
+connection.on(VoiceConnectionStatus.Ready, () => {
+	console.log('Voice Log: entered the Ready state - ready to play audio!');
+});
+
 const client = new Discord.Client({
     presence: {
         status: 'dnd',
