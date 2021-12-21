@@ -83,11 +83,18 @@ const video_player = async (guild, song) => {
         return;
     }
     const stream = ytdl(song.url, { filter: 'audioonly' });
-    song_queue.connection.play(stream, { seek: 0, volume: 1 })
-    .on('finish', () => {
-        song_queue.songs.shift();
-        video_player(guild, song_queue.songs[0]);
-    });
+    const subscription = connection.subscribe(stream);
+
+    // subscription could be undefined if the connection is destroyed!
+    if (subscription) {
+	    // Unsubscribe after 5 seconds (stop playing audio on the voice connection)
+	    setTimeout(() => subscription.unsubscribe(), 5_000);
+    }
+    //song_queue.connection.play(stream, { seek: 0, volume: 1 })
+    //.on('finish', () => {
+    //    song_queue.songs.shift();
+    //    video_player(guild, song_queue.songs[0]);
+    //});
     await song_queue.text_channel.send(`Now playing ***${song.title}***`)
 }
 
