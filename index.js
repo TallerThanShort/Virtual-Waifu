@@ -9,4 +9,4 @@ client.events = new Discord.Collection();
     require(`./handlers/${handler}`)(client, Discord);
 })
 
-client.login('ODk1MjUxMDE5NjAzMjU5NDAz.YV11fA.ncpM-tna2kU7w935GJvRetv8aFU');
+client.login(process.env.token);
