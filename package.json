@@ -2,7 +2,7 @@
   "name": "waifu-reborn.proj",
   "version": "13.0.1",
   "engines": {
-    "node": "14.1.0"
+    "node": "16.13.1"
   },
   "description": "Virtual Waifu: Reborn",
   "main": "index.js",
