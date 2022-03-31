@@ -20,7 +20,7 @@ module.exports = {
             .setFooter(footers)
             
             message.channel.send(helpEmbed);
-            message.react('855611027827982357');
+            message.react('839909564403941397');
         } else if(args[0] === 'ping'){
             const pingEmbed = new Discord.MessageEmbed()
             .setColor('RANDOM')
@@ -32,7 +32,7 @@ module.exports = {
             )
             .setFooter(footers)
             message.channel.send(pingEmbed);
-            message.react('855611027827982357');
+            message.react('839909564403941397');
         } else if(args[0] === 'debug'){
             const debugFail = new Discord.MessageEmbed()
             .setColor('RANDOM')
@@ -44,7 +44,7 @@ module.exports = {
             )
             .setFooter(footers)
             message.channel.send(debugFail);
-            message.react('855611027827982357');
+            message.react('839909564403941397');
         } else if(args[0] === 'play'){
             const playEmbed = new Discord.MessageEmbed()
             .setColor('RANDOM')
@@ -56,7 +56,7 @@ module.exports = {
             )
             .setFooter(footers)
             message.channel.send(playEmbed);
-            message.react('855611027827982357');
+            message.react('839909564403941397');
         } else if(args[0] === 'stop'){
             const stopEmbed = new Discord.MessageEmbed()
             .setColor('RANDOM')
@@ -68,7 +68,7 @@ module.exports = {
             )
             .setFooter(footers)
             message.channel.send(stopEmbed);
-            message.react('855611027827982357');
+            message.react('839909564403941397');
         } else if(args[0] === 'skip'){
             const skipEmbed = new Discord.MessageEmbed()
             .setColor('RANDOM')
@@ -80,7 +80,7 @@ module.exports = {
             )
             .setFooter(footers)
             message.channel.send(skipEmbed);
-            message.react('855611027827982357');
+            message.react('839909564403941397');
         }
     }
 }
