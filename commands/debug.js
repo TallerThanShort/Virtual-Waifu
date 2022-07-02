@@ -5,7 +5,6 @@ module.exports = {
     execute(message, args, cmd, client, Discord){
         // This command is to be restricted to the Admin's of my server only:
         if(message.member.roles.cache.has('885460946397577277')){
-            // To verify this command isn't being used maliciously (Some new Admins):
             console.log('@' + message.author.username + ' has requested debug');
             // Actual command
             const debugEmbed = new Discord.MessageEmbed()
@@ -14,11 +13,14 @@ module.exports = {
             .setAuthor('Waifu')
             .setURL('https://www.your-report.com/')
             .addFields(
-                {name: 'Discord Ver', value: `WIP`},
-                {name: 'Node.js Ver', value: process.version},
-                {name: 'Waifu Ver', value: "V.50 S.REBORN"}
+                {name: 'Discord.js', value: 'v12.5.3'},
+                {name: 'Node.js', value: 'v' + process.version},
+                {name: 'ffmpeg-static', value: 'v4.4.0'},
+                {name: 'yt-search', value: 'v2.10.9'},
+                {name: 'ytdl-core', value: 'v4.9.2'},
+                {name: 'Waifu Ver', value: "v50, REBORN Series 2"}
             )
-            .setFooter("Please note, whoever requests this command is logged in console to prevent abuse.")
+            .setFooter("Please note, whichever debugger who successfully summons this command is logged in console, to prevent abuse.")
             message.channel.send(debugEmbed);
         } else{
             message.channel.send(message.author.username + ", you don't have the right permissions to do this!");
